@@ -15,8 +15,8 @@ class ThreadsController extends Controller
     public function index()
     {
         $threads = Thread::latest()->get();
-        dd($threads);
-        view('threads.index', compact('threads'));
+//        dd($threads);
+        return view('threads.index', compact('threads'));
     }
 
     /**
@@ -43,12 +43,12 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Thread $thread
+     * @return Thread
      */
-    public function show($id)
+    public function show(Thread $thread)
     {
-        //
+        return view('threads.show', compact('thread'));
     }
 
     /**

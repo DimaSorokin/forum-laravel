@@ -15,7 +15,8 @@ use Illuminate\Support\Str;
 | model instances for testing / seeding your application's database.
 |
 */
-
+//        $threads = factory(App\Thread::class, 50)->create();
+//        $threads->each(function($thread){ factory(App\Reply::class, 10)->create(['thread_id'=>$thread->id]); });
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
