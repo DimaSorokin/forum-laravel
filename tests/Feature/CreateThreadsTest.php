@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 use App\Thread;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+//use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class CreateThreadsTest extends TestCase{
 
-    use DatabaseMigrations;
+//    use DatabaseMigrations;
 
     function test_a_logged_in_user_can_create_new_threads(){
         $this->expectException('Illuminate\Auth\AuthenticationException');
@@ -30,8 +30,8 @@ class CreateThreadsTest extends TestCase{
             ->assertSee($thread->body);
     }
     function test_an_authenticated_user_can_create_new_forum_threads_use_sign_in(){
-        $this->actingAs(create(User::class));
-//        $this->signIn();
+//        $this->actingAs(create(User::class));
+        $this->signIn();
         $thread = make(Thread::class);
         $this->post('/threads', $thread->toArray());
 
