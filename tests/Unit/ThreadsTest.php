@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Channel;
 use App\Thread;
 use App\User;
 use Tests\TestCase;
@@ -23,12 +24,17 @@ class ThreadsTest extends TestCase{
         $this->assertInstanceOf(User::class, $this->thread->creator);
     }
 
-    public function test_a_thread_can_add_a_reply(){
+    function test_a_thread_can_add_a_reply(){
         $this->thread->addReply([
            'body' => 'Foobar',
             'user_id' => 1
         ]);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+    function test_a_thread_belongs_to_a_channel(){
+        $thread = create(Thread::class);
+        $this->assertInstanceOf(Channel::class, $thread->channel);
+        $thread->channel;
     }
 }
