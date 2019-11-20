@@ -21,7 +21,7 @@ class CreateThreadsTest extends TestCase{
     function test_an_authenticated_user_can_create_new_forum_threads(){
         $this->actingAs(create(User::class));
 
-        $thread = make(Thread::class);
+        $thread = create(Thread::class);
 
         $this->post('/threads', $thread->toArray());
 
@@ -32,7 +32,7 @@ class CreateThreadsTest extends TestCase{
     function test_an_authenticated_user_can_create_new_forum_threads_use_sign_in(){
 //        $this->actingAs(create(User::class));
         $this->signIn();
-        $thread = make(Thread::class);
+        $thread = create(Thread::class);
         $this->post('/threads', $thread->toArray());
 
         $this->get($thread->path())

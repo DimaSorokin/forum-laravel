@@ -26,4 +26,13 @@ class FooGuestTest extends TestCase
 //            ->assertRedirect('/login');
 
     }
+    function test_an_authenticated_user_can_create_new_forum_threads()
+    {
+        $this->signIn();
+        $thread = create('App\Thread');
+        $this->post('/threads', $thread->toArray());
+        $this->get($thread->path())
+            ->assertSee($thread->title)
+            ->assertSee($thread->body);
+    }
 }
