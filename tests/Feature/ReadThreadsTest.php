@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Feature;
+use App\Channel;
 use App\Reply;
 use App\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -18,7 +19,7 @@ class ReadThreadsTest extends TestCase
     /**
      * @Threads
      */
-    public function test_a_user_can_view_all_threads()
+    function test_a_user_can_view_all_threads()
     {
         $this->signIn();
         #step2
@@ -26,14 +27,14 @@ class ReadThreadsTest extends TestCase
             ->assertSee($this->thread->title);
 //        $response->assertStatus(200);
     }
-    public function test_a_user_can_read_a_single_threads()
+    function test_a_user_can_read_a_single_threads()
     {
         $this->signIn();
         #step2
         $this->get($this->thread->path())
             ->assertSee($this->thread->title);
     }
-    public function test_a_user_can_read_replies_that_are_associated_with_a_thread()
+    function test_a_user_can_read_replies_that_are_associated_with_a_thread()
     {
         $this->signIn();
         #step3
@@ -44,4 +45,18 @@ class ReadThreadsTest extends TestCase
             ->assertSee($reply->body);
 
     }
+//    function test_a_user_can_filter_threads_according_to_a_channel(){
+//        $channel = create(Channel::class);
+//        $threadInChannel = create(Thread::class, ['channel_id' => $channel->id]);
+//
+//        $threadNotInChannel = create(Thread::class);
+//
+//        $this->get('/threads/' . $channel->slug)
+//            ->assertSee($threadInChannel->title)
+//            ->assertDontSee($threadNotInChannel->title);
+//        $this->get('/threads/' . $channel->slug)
+//            ->assertDontSee($threadNotInChannel->title);
+//    }
+
+
 }
