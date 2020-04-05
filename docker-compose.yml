@@ -1,5 +1,6 @@
 version: "3.7"
 #  http://localhost:8098/
+#  docker exec -it “container-id” /bin/bash
 services:
     nginx:
       build:

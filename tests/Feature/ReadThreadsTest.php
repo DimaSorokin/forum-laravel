@@ -4,6 +4,7 @@ namespace Tests\Feature;
 use App\Channel;
 use App\Reply;
 use App\Thread;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -44,6 +45,17 @@ class ReadThreadsTest extends TestCase
         $this->get($this->thread->path())
             ->assertSee($reply->body);
 
+    }
+    function test_a_user_can_filter_thread_by_username(){
+        $this->signIn(create(User::class, ['name'=>'dima2']));
+
+        $thread = create(Thread::class, ['user_id' => 726]);
+        $otherThread = create(Thread::class);
+
+//        Consequatur eos occaecati molestiae
+        $this->get('threads?by=dima2')
+            ->assertSee($thread->title)
+            ->assertDontSee($otherThread->title);
     }
 //    function test_a_user_can_filter_threads_according_to_a_channel(){
 //        $channel = create(Channel::class);
